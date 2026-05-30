@@ -274,6 +274,7 @@
                             <th style="min-width:110px">起拍价格</th>
                             <th style="min-width:240px">公告核心要素</th>
                             <th style="min-width:280px">挂拍背景</th>
+                            <th style="min-width:80px">拍卖链接</th>
                         </tr>
                     </thead>
                     <tbody id="table-body"></tbody>
@@ -282,26 +283,6 @@
         </div>
 
         <div class="footer-section">
-            <div class="footer-title">拍卖平台直达入口</div>
-            <div class="footer-desc">点击进入对应平台，查看标的详情、参与竞拍报名：</div>
-            <div class="link-grid">
-                <a class="platform-link" href="https://sf.taobao.com/item_list.htm?category=stock&status=1" target="_blank">
-                    <div class="platform-icon icon-ali">Ali</div>
-                    <div><div class="link-text">阿里司法拍卖 · 进行中</div><div class="link-desc">sf.taobao.com - 股权类目正在竞价的标的</div></div>
-                </a>
-                <a class="platform-link" href="https://sf.taobao.com/item_list.htm?category=stock&status=2" target="_blank">
-                    <div class="platform-icon icon-ali">Ali</div>
-                    <div><div class="link-text">阿里司法拍卖 · 即将开始</div><div class="link-desc">sf.taobao.com - 股权类目公告中的标的</div></div>
-                </a>
-                <a class="platform-link" href="https://paimai.jd.com/list?childrenCateId=12732" target="_blank">
-                    <div class="platform-icon icon-jd">JD</div>
-                    <div><div class="link-text">京东司法拍卖 · 股权证券</div><div class="link-desc">paimai.jd.com - 含破产强清及法院委托拍卖</div></div>
-                </a>
-                <a class="platform-link" href="https://paimai.jd.com/list?childrenCateId=12732&status=1" target="_blank">
-                    <div class="platform-icon icon-jd">JD</div>
-                    <div><div class="link-text">京东司法拍卖 · 即将开始</div><div class="link-desc">paimai.jd.com - 即将开拍的股权证券标的</div></div>
-                </a>
-            </div>
             <div class="disclaimer">
                 免责声明：本页面信息仅供参考，不构成投资建议。具体拍卖条件、保证金要求、竞买资格等以法院公告和平台公示为准。<br>
                 数据来源：上市公司公告、阿里司法拍卖平台（sf.taobao.com）、京东司法拍卖平台（paimai.jd.com）。更新频率：每周一、周四。
@@ -320,7 +301,8 @@ const auctionData = [
         dateDisplay: "06-05 10:00", dateEndDisplay: "06-06 10:00",
         price: "约9216.9万元", priceNote: "约2.01元/股",
         summary: "股东迹象信息（破产清算中）所持4577.92万股将在京东破产强清平台拍卖，占总股本0.68%。系2016年发行股份购买资产时取得。",
-        background: "利欧股份主营数字营销与水泵。迹象信息因破产清算，其管理人依法拍卖所持利欧股份股票偿债。利欧股份经营正常，本次拍卖对公司治理无实质影响，但体量较大或对二级市场形成短期抛压。"
+        background: "利欧股份主营数字营销与水泵。迹象信息因破产清算，其管理人依法拍卖所持利欧股份股票偿债。利欧股份经营正常，本次拍卖对公司治理无实质影响，但体量较大或对二级市场形成短期抛压。",
+        auctionUrl: "https://paimai.jd.com/search?keyword=利欧股份&childrenCateId=12732"
     },
     {
         id: 2, name: "群兴玩具", code: "002575", market: "SZ",
@@ -330,7 +312,8 @@ const auctionData = [
         dateDisplay: "06-08 10:00", dateEndDisplay: "06-09 10:00",
         price: "一拍价80%", priceNote: "降价二拍",
         summary: "第一大股东深圳星河140万股进行降价第二次拍卖（一拍已流拍），另有830万股将于后续安排拍卖。",
-        background: "群兴玩具第一大股东深圳星河因债务纠纷被苏州中院强制执行。2026年4月首拍流拍，本次为降价后二拍。累计拟拍卖约970万股，占公司总股本比例较大，控制权面临不确定性。"
+        background: "群兴玩具第一大股东深圳星河因债务纠纷被苏州中院强制执行。2026年4月首拍流拍，本次为降价后二拍。累计拟拍卖约970万股，占公司总股本比例较大，控制权面临不确定性。",
+        auctionUrl: "https://sf.taobao.com/item_list.htm?keyword=群兴玩具"
     },
     {
         id: 3, name: "恒润股份", code: "603985", market: "SH",
@@ -340,7 +323,8 @@ const auctionData = [
         dateDisplay: "06-13 10:00", dateEndDisplay: "次日10:00",
         price: "前20日均价×90%", priceNote: "约按市价九折",
         summary: "5%以上股东承立新所持1693.29万股将被拍卖（占总股本约3.84%），平台为淘宝网司法拍卖。此前1280万股已分两次成交。",
-        background: "恒润股份主营法兰、锻件，近年布局算力租赁。承立新因执行裁定被深圳中院/江阴法院联合处置。此前1014万股被王梅耳竞得、266万股被佟亮竞得，本次为其剩余持股的拍卖。"
+        background: "恒润股份主营法兰、锻件，近年布局算力租赁。承立新因执行裁定被深圳中院/江阴法院联合处置。此前1014万股被王梅耳竞得、266万股被佟亮竞得，本次为其剩余持股的拍卖。",
+        auctionUrl: "https://sf.taobao.com/item_list.htm?keyword=恒润股份"
     },
     {
         id: 4, name: "万马科技", code: "300698", market: "SZ",
@@ -350,7 +334,8 @@ const auctionData = [
         dateDisplay: "06-15 10:00", dateEndDisplay: "06-16 10:00",
         price: "待公告", priceNote: "参考前20日均价",
         summary: "股东闫楠所持部分质押限售股将在淘宝网司法拍卖平台拍卖。此前3月首拍流拍，92万股已于5月完成二拍成交。",
-        background: "万马科技主营通信网络设备，股东闫楠因多起债务纠纷被法院执行。2026年3月首批在京东平台流拍后转至杭州上城区法院在淘宝平台继续拍卖，闫楠持股比例因连续执行持续下降。"
+        background: "万马科技主营通信网络设备，股东闫楠因多起债务纠纷被法院执行。2026年3月首批在京东平台流拍后转至杭州上城区法院在淘宝平台继续拍卖，闫楠持股比例因连续执行持续下降。",
+        auctionUrl: "https://sf.taobao.com/item_list.htm?keyword=万马科技"
     },
     {
         id: 5, name: "亚士创能", code: "603378", market: "SH",
@@ -360,7 +345,8 @@ const auctionData = [
         dateDisplay: "06-15 10:00", dateEndDisplay: "06-16 10:00",
         price: "约745.6万元", priceNote: "约3.73元/股",
         summary: "控股股东一致行动人李金钟200万股无限售流通股将被拍卖。此前控股股东创能明850万股于5月23日已成交。",
-        background: "亚士创能主营建筑涂料，控股股东创能明及一致行动人因债务违约致股份连续被拍卖。控股股东持股已降至15.44%，武汉武昌区法院与杭州法院均有执行案件，控制权稳定性受关注。"
+        background: "亚士创能主营建筑涂料，控股股东创能明及一致行动人因债务违约致股份连续被拍卖。控股股东持股已降至15.44%，武汉武昌区法院与杭州法院均有执行案件，控制权稳定性受关注。",
+        auctionUrl: "https://sf.taobao.com/item_list.htm?keyword=亚士创能"
     },
     {
         id: 6, name: "古鳌科技", code: "300551", market: "SZ",
@@ -370,7 +356,8 @@ const auctionData = [
         dateDisplay: "06-20 10:00", dateEndDisplay: "06-21 10:00",
         price: "待公告", priceNote: "参考前20日均价",
         summary: "第一大股东陈崇军260万股（占总股本0.71%）将在淘宝网司法拍卖平台拍卖。5%以上股东持股被强制执行。",
-        background: "古鳌科技主营智能现金处理设备（点钞机、清分机等）。第一大股东陈崇军因个人债务纠纷被长沙望城区法院强制执行，此前已有240万股被公告拍卖。若本次260万股全部成交，陈崇军持股将大幅下降，控制权格局生变。"
+        background: "古鳌科技主营智能现金处理设备（点钞机、清分机等）。第一大股东陈崇军因个人债务纠纷被长沙望城区法院强制执行，此前已有240万股被公告拍卖。若本次260万股全部成交，陈崇军持股将大幅下降，控制权格局生变。",
+        auctionUrl: "https://sf.taobao.com/item_list.htm?keyword=古鳌科技"
     },
     {
         id: 7, name: "ST华谊", code: "300027", market: "SZ",
@@ -380,7 +367,8 @@ const auctionData = [
         dateDisplay: "06-22 10:00", dateEndDisplay: "06-23 10:00",
         price: "待公告", priceNote: "参考前20日均价70%",
         summary: "实控人王忠军4000万股（占总股本1.44%）将被拍卖。若成交，第一大股东持股进一步下降，控制权变动风险显著加大。",
-        background: "ST华谊连续三年扣非净利为负，2026年4月被实施其他风险警示。实控人兄弟二人资金链断裂：王忠磊180万股已在京东拍卖成交（中信系接盘），王忠军另有2800万股面临后续拍卖。"
+        background: "ST华谊连续三年扣非净利为负，2026年4月被实施其他风险警示。实控人兄弟二人资金链断裂：王忠磊180万股已在京东拍卖成交（中信系接盘），王忠军另有2800万股面临后续拍卖。",
+        auctionUrl: "https://paimai.jd.com/search?keyword=华谊兄弟&childrenCateId=12732"
     },
     {
         id: 8, name: "广田集团", code: "002482", market: "SZ",
@@ -390,7 +378,8 @@ const auctionData = [
         dateDisplay: "06-22 10:00", dateEndDisplay: "06-23 10:00",
         price: "分批拍卖", priceNote: "单批约601万元起",
         summary: "持股5%以上股东广田控股所持约1.2亿股将在京东司法拍卖平台分多批次拍卖。本次为第一次拍卖（含30个标的）。",
-        background: "广田集团主营建筑装饰，广田控股因债务纠纷被沈阳中院执行。总计约1.2亿股被安排拍卖，分为多个批次在京东平台进行。体量巨大，将显著影响公司股权结构和控制权格局。"
+        background: "广田集团主营建筑装饰，广田控股因债务纠纷被沈阳中院执行。总计约1.2亿股被安排拍卖，分为多个批次在京东平台进行。体量巨大，将显著影响公司股权结构和控制权格局。",
+        auctionUrl: "https://paimai.jd.com/search?keyword=广田集团&childrenCateId=12732"
     },
     {
         id: 9, name: "劲嘉股份", code: "002191", market: "SZ",
@@ -400,7 +389,8 @@ const auctionData = [
         dateDisplay: "06-23 10:00", dateEndDisplay: "06-24 10:00",
         price: "待公告", priceNote: "参考前20日均价",
         summary: "控股股东劲嘉创投3500万股（占总股本2.41%）将被司法拍卖。若成交，控股股东持股比例将由22.37%降至19.96%。",
-        background: "劲嘉股份主营烟标印刷及包装，控股股东劲嘉创投因债务纠纷被深圳中院执行。此前已有部分股份被拍卖成交（2026年4-5月），本次为新一轮拍卖。连续拍卖导致控股股东持股比例持续稀释，股权结构稳定性受市场关注。"
+        background: "劲嘉股份主营烟标印刷及包装，控股股东劲嘉创投因债务纠纷被深圳中院执行。此前已有部分股份被拍卖成交（2026年4-5月），本次为新一轮拍卖。连续拍卖导致控股股东持股比例持续稀释，股权结构稳定性受市场关注。",
+        auctionUrl: "https://sf.taobao.com/item_list.htm?keyword=劲嘉股份"
     },
     {
         id: 10, name: "松井股份", code: "688157", market: "SH",
@@ -410,7 +400,8 @@ const auctionData = [
         dateDisplay: "06-25 10:00", dateEndDisplay: "06-26 10:00",
         price: "约1942.5万元", priceNote: "前20日均价×股数",
         summary: "实控人凌云剑直接持有的56.86万股（占总股本0.36%）在京东网司法拍卖。受让方6个月内不得减持。",
-        background: "松井股份为科创板涂料企业，2026Q1由盈转亏。实控人凌云剑与星帝企业存在合同纠纷被强制执行。凌云剑仍通过其他主体间接控制公司，本次处置对控制权影响有限。"
+        background: "松井股份为科创板涂料企业，2026Q1由盈转亏。实控人凌云剑与星帝企业存在合同纠纷被强制执行。凌云剑仍通过其他主体间接控制公司，本次处置对控制权影响有限。",
+        auctionUrl: "https://paimai.jd.com/search?keyword=松井股份&childrenCateId=12732"
     },
     {
         id: 11, name: "迅游科技", code: "300467", market: "SZ",
@@ -420,7 +411,8 @@ const auctionData = [
         dateDisplay: "06-29 14:00", dateEndDisplay: "06-30 14:00",
         price: "待公告", priceNote: "参考前20日均价",
         summary: "持股5%以上股东（创始人）袁旭830.54万股将被拍卖，占公司总股本约4.19%。拍卖平台为阿里司法拍卖。",
-        background: "袁旭为迅游科技创始人，因借款担保纠纷被成都中院强制执行。公司主营游戏加速器业务，股价近期创8年新高。袁旭此前多次质押股份，本次系其个人债务升级所致。若成交将显著改变持股结构。"
+        background: "袁旭为迅游科技创始人，因借款担保纠纷被成都中院强制执行。公司主营游戏加速器业务，股价近期创8年新高。袁旭此前多次质押股份，本次系其个人债务升级所致。若成交将显著改变持股结构。",
+        auctionUrl: "https://sf.taobao.com/item_list.htm?keyword=迅游科技"
     },
     {
         id: 12, name: "*ST三房", code: "600370", market: "SH",
@@ -430,7 +422,8 @@ const auctionData = [
         dateDisplay: "待定（约7月初）", dateEndDisplay: "告知书后约30日",
         price: "约4509万元", priceNote: "1.31元×70%×4917万",
         summary: "控股股东三房巷集团4917万股将被拍卖，累计拟拍卖达3.84亿股（占总股本约9.5%）。平台为阿里司法拍卖。",
-        background: "*ST三房主营化纤及薄膜，因金融借款合同纠纷被江阴法院执行。控股股东持有约73%股份，大量被轮候冻结。公司股价持续暴跌（连续14个跌停），目前收于1.31元附近，存在面值退市风险。"
+        background: "*ST三房主营化纤及薄膜，因金融借款合同纠纷被江阴法院执行。控股股东持有约73%股份，大量被轮候冻结。公司股价持续暴跌（连续14个跌停），目前收于1.31元附近，存在面值退市风险。",
+        auctionUrl: "https://sf.taobao.com/item_list.htm?keyword=三房巷"
     },
     {
         id: 13, name: "荣盛发展", code: "002146", market: "SZ",
@@ -440,7 +433,8 @@ const auctionData = [
         dateDisplay: "待定（二拍待公告）", dateEndDisplay: "一拍流拍后60日内",
         price: "一拍价80%（预估）", priceNote: "一拍起拍价约1.82亿元",
         summary: "控股股东荣盛控股1.32亿股（占总股本3.05%）一拍已于4月27-28日流拍（无人报名）。预计6-7月安排二拍，起拍价将在一拍基础上降价20%。",
-        background: "荣盛发展为河北地产龙头，近年受行业下行影响经营承压，2026Q1亏损6.58亿元。控股股东荣盛控股因债务纠纷被天津高院执行，持有公司7.52亿股（占17.29%），大量被冻结。一拍流拍反映市场对地产股接盘意愿极低。"
+        background: "荣盛发展为河北地产龙头，近年受行业下行影响经营承压，2026Q1亏损6.58亿元。控股股东荣盛控股因债务纠纷被天津高院执行，持有公司7.52亿股（占17.29%），大量被冻结。一拍流拍反映市场对地产股接盘意愿极低。",
+        auctionUrl: "https://sf.taobao.com/item_list.htm?keyword=荣盛发展"
     }
 ];
 
@@ -497,6 +491,7 @@ function renderTable(filter) {
                 </td>
                 <td class="summary-cell">${item.summary}</td>
                 <td class="bg-cell">${item.background}</td>
+                <td style="text-align:center"><a href="${item.auctionUrl}" target="_blank" style="display:inline-block;padding:6px 12px;background:var(--primary);color:#fff;border-radius:4px;text-decoration:none;font-size:12px;white-space:nowrap;">查看标的</a></td>
             </tr>
         `;
     });
