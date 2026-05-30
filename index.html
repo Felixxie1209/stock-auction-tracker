@@ -313,17 +313,7 @@
 // Data sorted by auction start date
 const auctionData = [
     {
-        id: 1, name: "深华发A", code: "000020", market: "SZ",
-        shares: "武汉中恒集团持有318.99万股",
-        platform: "jd", court: "广东省深圳市中级人民法院",
-        date: "2026-05-28", dateEnd: "2026-05-29",
-        dateDisplay: "05-28 10:00", dateEndDisplay: "05-29 10:00",
-        price: "待确认", priceNote: "首次拍卖",
-        summary: "控股股东武汉中恒集团318.99万股在京东网司法拍卖平台首次拍卖。受让方6个月内不得减持。控股股东约1.19亿股被轮候冻结。",
-        background: "深华发A主营房地产开发，卷入与深圳万科22亿元房地产合同仲裁案。控股股东因多重债务纠纷被执行，约1.19亿股被司法轮候冻结。本次为首轮拍卖，后续可能有更多股份被处置。"
-    },
-    {
-        id: 2, name: "利欧股份", code: "002131", market: "SZ",
+        id: 1, name: "利欧股份", code: "002131", market: "SZ",
         shares: "迹象信息持有4577.92万股",
         platform: "jd", court: "迹象信息管理人（破产强清）",
         date: "2026-06-05", dateEnd: "2026-06-06",
@@ -333,7 +323,7 @@ const auctionData = [
         background: "利欧股份主营数字营销与水泵。迹象信息因破产清算，其管理人依法拍卖所持利欧股份股票偿债。利欧股份经营正常，本次拍卖对公司治理无实质影响，但体量较大或对二级市场形成短期抛压。"
     },
     {
-        id: 3, name: "群兴玩具", code: "002575", market: "SZ",
+        id: 2, name: "群兴玩具", code: "002575", market: "SZ",
         shares: "深圳星河持有140万股（第二次拍卖）",
         platform: "ali", court: "江苏省苏州市中级人民法院",
         date: "2026-06-08", dateEnd: "2026-06-09",
@@ -343,7 +333,7 @@ const auctionData = [
         background: "群兴玩具第一大股东深圳星河因债务纠纷被苏州中院强制执行。2026年4月首拍流拍，本次为降价后二拍。累计拟拍卖约970万股，占公司总股本比例较大，控制权面临不确定性。"
     },
     {
-        id: 4, name: "恒润股份", code: "603985", market: "SH",
+        id: 3, name: "恒润股份", code: "603985", market: "SH",
         shares: "承立新持有1693.29万股",
         platform: "ali", court: "江阴市人民法院",
         date: "2026-06-13", dateEnd: "2026-06-14",
@@ -353,7 +343,7 @@ const auctionData = [
         background: "恒润股份主营法兰、锻件，近年布局算力租赁。承立新因执行裁定被深圳中院/江阴法院联合处置。此前1014万股被王梅耳竞得、266万股被佟亮竞得，本次为其剩余持股的拍卖。"
     },
     {
-        id: 5, name: "万马科技", code: "300698", market: "SZ",
+        id: 4, name: "万马科技", code: "300698", market: "SZ",
         shares: "闫楠持有部分股份（质押限售）",
         platform: "ali", court: "浙江省杭州市上城区人民法院",
         date: "2026-06-15", dateEnd: "2026-06-16",
@@ -363,7 +353,7 @@ const auctionData = [
         background: "万马科技主营通信网络设备，股东闫楠因多起债务纠纷被法院执行。2026年3月首批在京东平台流拍后转至杭州上城区法院在淘宝平台继续拍卖，闫楠持股比例因连续执行持续下降。"
     },
     {
-        id: 6, name: "亚士创能", code: "603378", market: "SH",
+        id: 5, name: "亚士创能", code: "603378", market: "SH",
         shares: "李金钟持有200万股",
         platform: "ali", court: "杭州市上城区人民法院",
         date: "2026-06-15", dateEnd: "2026-06-16",
@@ -371,6 +361,16 @@ const auctionData = [
         price: "约745.6万元", priceNote: "约3.73元/股",
         summary: "控股股东一致行动人李金钟200万股无限售流通股将被拍卖。此前控股股东创能明850万股于5月23日已成交。",
         background: "亚士创能主营建筑涂料，控股股东创能明及一致行动人因债务违约致股份连续被拍卖。控股股东持股已降至15.44%，武汉武昌区法院与杭州法院均有执行案件，控制权稳定性受关注。"
+    },
+    {
+        id: 6, name: "古鳌科技", code: "300551", market: "SZ",
+        shares: "陈崇军持有260万股（第一大股东）",
+        platform: "ali", court: "湖南省长沙市望城区人民法院",
+        date: "2026-06-20", dateEnd: "2026-06-21",
+        dateDisplay: "06-20 10:00", dateEndDisplay: "06-21 10:00",
+        price: "待公告", priceNote: "参考前20日均价",
+        summary: "第一大股东陈崇军260万股（占总股本0.71%）将在淘宝网司法拍卖平台拍卖。5%以上股东持股被强制执行。",
+        background: "古鳌科技主营智能现金处理设备（点钞机、清分机等）。第一大股东陈崇军因个人债务纠纷被长沙望城区法院强制执行，此前已有240万股被公告拍卖。若本次260万股全部成交，陈崇军持股将大幅下降，控制权格局生变。"
     },
     {
         id: 7, name: "ST华谊", code: "300027", market: "SZ",
@@ -393,7 +393,17 @@ const auctionData = [
         background: "广田集团主营建筑装饰，广田控股因债务纠纷被沈阳中院执行。总计约1.2亿股被安排拍卖，分为多个批次在京东平台进行。体量巨大，将显著影响公司股权结构和控制权格局。"
     },
     {
-        id: 9, name: "松井股份", code: "688157", market: "SH",
+        id: 9, name: "劲嘉股份", code: "002191", market: "SZ",
+        shares: "劲嘉创投持有3500万股（控股股东）",
+        platform: "ali", court: "广东省深圳市中级人民法院",
+        date: "2026-06-23", dateEnd: "2026-06-24",
+        dateDisplay: "06-23 10:00", dateEndDisplay: "06-24 10:00",
+        price: "待公告", priceNote: "参考前20日均价",
+        summary: "控股股东劲嘉创投3500万股（占总股本2.41%）将被司法拍卖。若成交，控股股东持股比例将由22.37%降至19.96%。",
+        background: "劲嘉股份主营烟标印刷及包装，控股股东劲嘉创投因债务纠纷被深圳中院执行。此前已有部分股份被拍卖成交（2026年4-5月），本次为新一轮拍卖。连续拍卖导致控股股东持股比例持续稀释，股权结构稳定性受市场关注。"
+    },
+    {
+        id: 10, name: "松井股份", code: "688157", market: "SH",
         shares: "凌云剑持有56.86万股",
         platform: "jd", court: "广东省深圳市中级人民法院",
         date: "2026-06-25", dateEnd: "2026-06-26",
@@ -403,7 +413,7 @@ const auctionData = [
         background: "松井股份为科创板涂料企业，2026Q1由盈转亏。实控人凌云剑与星帝企业存在合同纠纷被强制执行。凌云剑仍通过其他主体间接控制公司，本次处置对控制权影响有限。"
     },
     {
-        id: 10, name: "迅游科技", code: "300467", market: "SZ",
+        id: 11, name: "迅游科技", code: "300467", market: "SZ",
         shares: "袁旭持有830.54万股",
         platform: "ali", court: "成都市中级人民法院",
         date: "2026-06-29", dateEnd: "2026-06-30",
@@ -413,7 +423,7 @@ const auctionData = [
         background: "袁旭为迅游科技创始人，因借款担保纠纷被成都中院强制执行。公司主营游戏加速器业务，股价近期创8年新高。袁旭此前多次质押股份，本次系其个人债务升级所致。若成交将显著改变持股结构。"
     },
     {
-        id: 11, name: "*ST三房", code: "600370", market: "SH",
+        id: 12, name: "*ST三房", code: "600370", market: "SH",
         shares: "三房巷集团持有4917万股",
         platform: "ali", court: "江阴市人民法院",
         date: "2026-07-05", dateEnd: "2026-07-06",
@@ -421,11 +431,22 @@ const auctionData = [
         price: "约4509万元", priceNote: "1.31元×70%×4917万",
         summary: "控股股东三房巷集团4917万股将被拍卖，累计拟拍卖达3.84亿股（占总股本约9.5%）。平台为阿里司法拍卖。",
         background: "*ST三房主营化纤及薄膜，因金融借款合同纠纷被江阴法院执行。控股股东持有约73%股份，大量被轮候冻结。公司股价持续暴跌（连续14个跌停），目前收于1.31元附近，存在面值退市风险。"
+    },
+    {
+        id: 13, name: "荣盛发展", code: "002146", market: "SZ",
+        shares: "荣盛控股持有1.32亿股",
+        platform: "ali", court: "天津市高级人民法院",
+        date: "2026-07-10", dateEnd: "2026-07-11",
+        dateDisplay: "待定（二拍待公告）", dateEndDisplay: "一拍流拍后60日内",
+        price: "一拍价80%（预估）", priceNote: "一拍起拍价约1.82亿元",
+        summary: "控股股东荣盛控股1.32亿股（占总股本3.05%）一拍已于4月27-28日流拍（无人报名）。预计6-7月安排二拍，起拍价将在一拍基础上降价20%。",
+        background: "荣盛发展为河北地产龙头，近年受行业下行影响经营承压，2026Q1亏损6.58亿元。控股股东荣盛控股因债务纠纷被天津高院执行，持有公司7.52亿股（占17.29%），大量被冻结。一拍流拍反映市场对地产股接盘意愿极低。"
     }
 ];
 
 function getStatus(item) {
-    const today = new Date('2026-05-30');
+    const today = new Date();
+    today.setHours(0,0,0,0);
     const auctionDate = new Date(item.date);
     const diff = Math.ceil((auctionDate - today) / (1000*60*60*24));
     if (diff <= 0) return { label: '进行中', cls: 'status-live', type: 'live' };
