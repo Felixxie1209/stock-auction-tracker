@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>上市公司股票司法拍卖标的跟踪</title>
+    <style>
+        :root {
+            --primary: #1e3a5f;
+            --primary-light: #2f5496;
+            --accent: #d4380d;
+            --success: #389e0d;
+            --warning: #d46b08;
+            --bg: #f5f7fa;
+            --card: #ffffff;
+            --border: #e8ecf0;
+            --text: #1a1f36;
+            --text-secondary: #5e6687;
+            --text-muted: #8f9bb3;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .container { max-width: 1480px; margin: 0 auto; padding: 24px 20px; }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 60%, #4a7bc7 100%);
+            color: white;
+            padding: 36px 44px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 24px rgba(30, 58, 95, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+        .header::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .header h1 { font-size: 26px; font-weight: 700; margin-bottom: 10px; position: relative; }
+        .header .subtitle { font-size: 14px; opacity: 0.9; margin-bottom: 16px; }
+        .meta-row {
+            display: flex; flex-wrap: wrap; gap: 20px;
+            font-size: 13px; opacity: 0.85;
+        }
+        .meta-row span { display: inline-flex; align-items: center; gap: 5px; }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .stat-card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 20px 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid var(--border);
+        }
+        .stat-card .label { font-size: 12px; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .stat-card .value { font-size: 28px; font-weight: 700; color: var(--primary-light); }
+        .stat-card .value.warn { color: var(--accent); }
+        .stat-card .desc { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+        /* Table */
+        .table-card {
+            background: var(--card);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+        }
+        .table-toolbar {
+            padding: 18px 28px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .toolbar-left { display: flex; align-items: center; gap: 12px; }
+        .toolbar-title { font-size: 16px; font-weight: 600; }
+        .toolbar-count { font-size: 12px; color: var(--text-muted); background: var(--bg); padding: 3px 10px; border-radius: 12px; }
+        .filter-group { display: flex; gap: 6px; }
+        .filter-btn {
+            padding: 6px 14px; border-radius: 8px; border: 1px solid var(--border);
+            background: white; font-size: 12px; cursor: pointer; transition: all 0.2s;
+            color: var(--text-secondary);
+        }
+        .filter-btn:hover { border-color: var(--primary-light); color: var(--primary-light); }
+        .filter-btn.active { background: var(--primary-light); color: white; border-color: var(--primary-light); }
+
+        .table-scroll { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        thead th {
+            background: #f8fafc;
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 12px;
+            color: var(--text-secondary);
+            border-bottom: 2px solid var(--border);
+            white-space: nowrap;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        tbody td {
+            padding: 16px;
+            border-bottom: 1px solid #f4f6f8;
+            vertical-align: top;
+        }
+        tbody tr { transition: background 0.15s; }
+        tbody tr:hover { background: #f8fafd; }
+        tbody tr:last-child td { border-bottom: none; }
+
+        .stock-info { display: flex; flex-direction: column; gap: 3px; }
+        .stock-name { font-weight: 600; color: var(--text); font-size: 14px; }
+        .stock-code { color: var(--text-muted); font-size: 11px; font-family: 'SF Mono', Monaco, monospace; }
+        .stock-shares { color: var(--text-secondary); font-size: 12px; margin-top: 2px; }
+
+        .platform-tag {
+            display: inline-block; padding: 2px 8px; border-radius: 4px;
+            font-size: 11px; font-weight: 500; margin-top: 4px;
+        }
+        .platform-ali { background: #fff2e8; color: #d4380d; }
+        .platform-jd { background: #e6f7ff; color: #0070c0; }
+
+        .date-cell { font-variant-numeric: tabular-nums; font-size: 13px; }
+        .date-main { font-weight: 500; color: var(--text); }
+        .date-end { font-size: 11px; color: var(--text-muted); }
+
+        .price-cell { font-weight: 600; color: var(--accent); font-size: 13px; }
+        .price-note { font-size: 11px; color: var(--text-muted); font-weight: 400; margin-top: 2px; }
+
+        .summary-cell { font-size: 12px; color: var(--text-secondary); line-height: 1.8; max-width: 300px; }
+        .bg-cell { font-size: 12px; color: var(--text-secondary); line-height: 1.8; max-width: 340px; }
+
+        .status-badge {
+            display: inline-flex; align-items: center; gap: 4px;
+            padding: 3px 10px; border-radius: 6px;
+            font-size: 11px; font-weight: 500;
+        }
+        .status-dot { width: 6px; height: 6px; border-radius: 50%; }
+        .status-live { background: #fff1f0; color: #cf1322; }
+        .status-live .status-dot { background: #cf1322; animation: pulse 1.5s infinite; }
+        .status-soon { background: #fff7e6; color: var(--warning); }
+        .status-soon .status-dot { background: var(--warning); }
+        .status-upcoming { background: #e6f7ff; color: #096dd9; }
+        .status-upcoming .status-dot { background: #096dd9; }
+        .status-pending { background: #f6f6f6; color: #8c8c8c; }
+        .status-pending .status-dot { background: #8c8c8c; }
+
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+        /* Footer */
+        .footer-section {
+            margin-top: 24px;
+            background: var(--card);
+            border-radius: 12px;
+            padding: 28px 32px;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .footer-title { font-size: 15px; font-weight: 600; margin-bottom: 12px; color: var(--text); }
+        .footer-desc { font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; }
+        .link-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+        .platform-link {
+            display: flex; align-items: center; gap: 12px;
+            padding: 14px 18px;
+            background: var(--bg); border-radius: 10px;
+            text-decoration: none; color: var(--text);
+            transition: all 0.2s; border: 1px solid transparent;
+        }
+        .platform-link:hover { border-color: var(--primary-light); background: #f0f5ff; }
+        .platform-icon {
+            width: 40px; height: 40px; border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px; font-weight: 700;
+        }
+        .icon-ali { background: #fff2e8; color: #d4380d; }
+        .icon-jd { background: #e6f7ff; color: #0070c0; }
+        .platform-link .link-text { font-size: 13px; font-weight: 500; }
+        .platform-link .link-desc { font-size: 11px; color: var(--text-muted); }
+        .disclaimer {
+            margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border);
+            font-size: 11px; color: var(--text-muted); line-height: 1.8;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 12px 10px; }
+            .header { padding: 24px 20px; border-radius: 12px; }
+            .header h1 { font-size: 20px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .stat-card { padding: 14px 16px; }
+            .stat-card .value { font-size: 22px; }
+            table { font-size: 12px; }
+            thead th, tbody td { padding: 10px 8px; }
+            .table-toolbar { padding: 12px 16px; }
+            .link-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>上市公司股票司法拍卖标的跟踪</h1>
+            <p class="subtitle">整合阿里司法拍卖、京东司法拍卖双平台数据，实时跟踪A股/北交所/新三板上市公司股票拍卖动态</p>
+            <div class="meta-row">
+                <span>&#128197; 最近更新：<strong id="update-date">2026-05-30</strong></span>
+                <span>&#128260; 更新频率：每周一、周四 10:00前</span>
+                <span>&#127919; 筛选范围：尚未结拍（即将开拍 + 进行中）</span>
+            </div>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="label">跟踪标的总数</div>
+                <div class="value" id="total-count">11</div>
+                <div class="desc">含阿里 + 京东双平台</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">7日内开拍</div>
+                <div class="value warn" id="soon-count">2</div>
+                <div class="desc">需重点关注</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">阿里平台</div>
+                <div class="value" id="ali-count" style="color:#d4380d">5</div>
+                <div class="desc">sf.taobao.com</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">京东平台</div>
+                <div class="value" id="jd-count" style="color:#0070c0">5</div>
+                <div class="desc">paimai.jd.com</div>
+            </div>
+        </div>
+
+        <div class="table-card">
+            <div class="table-toolbar">
+                <div class="toolbar-left">
+                    <span class="toolbar-title">拍卖标的明细</span>
+                    <span class="toolbar-count" id="showing-count">显示 11 条</span>
+                </div>
+                <div class="filter-group">
+                    <button class="filter-btn active" onclick="applyFilter('all', this)">全部</button>
+                    <button class="filter-btn" onclick="applyFilter('soon', this)">7日内</button>
+                    <button class="filter-btn" onclick="applyFilter('ali', this)">阿里平台</button>
+                    <button class="filter-btn" onclick="applyFilter('jd', this)">京东平台</button>
+                </div>
+            </div>
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:40px">#</th>
+                            <th style="min-width:170px">标的名称 / 平台</th>
+                            <th style="min-width:140px">处置机构</th>
+                            <th style="min-width:120px">起拍时间</th>
+                            <th style="min-width:110px">起拍价格</th>
+                            <th style="min-width:240px">公告核心要素</th>
+                            <th style="min-width:280px">挂拍背景</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="footer-section">
+            <div class="footer-title">拍卖平台直达入口</div>
+            <div class="footer-desc">点击进入对应平台，查看标的详情、参与竞拍报名：</div>
+            <div class="link-grid">
+                <a class="platform-link" href="https://sf.taobao.com/item_list.htm?category=stock&status=1" target="_blank">
+                    <div class="platform-icon icon-ali">Ali</div>
+                    <div><div class="link-text">阿里司法拍卖 · 进行中</div><div class="link-desc">sf.taobao.com - 股权类目正在竞价的标的</div></div>
+                </a>
+                <a class="platform-link" href="https://sf.taobao.com/item_list.htm?category=stock&status=2" target="_blank">
+                    <div class="platform-icon icon-ali">Ali</div>
+                    <div><div class="link-text">阿里司法拍卖 · 即将开始</div><div class="link-desc">sf.taobao.com - 股权类目公告中的标的</div></div>
+                </a>
+                <a class="platform-link" href="https://paimai.jd.com/list?childrenCateId=12732" target="_blank">
+                    <div class="platform-icon icon-jd">JD</div>
+                    <div><div class="link-text">京东司法拍卖 · 股权证券</div><div class="link-desc">paimai.jd.com - 含破产强清及法院委托拍卖</div></div>
+                </a>
+                <a class="platform-link" href="https://paimai.jd.com/list?childrenCateId=12732&status=1" target="_blank">
+                    <div class="platform-icon icon-jd">JD</div>
+                    <div><div class="link-text">京东司法拍卖 · 即将开始</div><div class="link-desc">paimai.jd.com - 即将开拍的股权证券标的</div></div>
+                </a>
+            </div>
+            <div class="disclaimer">
+                免责声明：本页面信息仅供参考，不构成投资建议。具体拍卖条件、保证金要求、竞买资格等以法院公告和平台公示为准。<br>
+                数据来源：上市公司公告、阿里司法拍卖平台（sf.taobao.com）、京东司法拍卖平台（paimai.jd.com）。更新频率：每周一、周四。
+            </div>
+        </div>
+    </div>
+
+<script>
+// Data sorted by auction start date
+const auctionData = [
+    {
+        id: 1, name: "深华发A", code: "000020", market: "SZ",
+        shares: "武汉中恒集团持有318.99万股",
+        platform: "jd", court: "广东省深圳市中级人民法院",
+        date: "2026-05-28", dateEnd: "2026-05-29",
+        dateDisplay: "05-28 10:00", dateEndDisplay: "05-29 10:00",
+        price: "待确认", priceNote: "首次拍卖",
+        summary: "控股股东武汉中恒集团318.99万股在京东网司法拍卖平台首次拍卖。受让方6个月内不得减持。控股股东约1.19亿股被轮候冻结。",
+        background: "深华发A主营房地产开发，卷入与深圳万科22亿元房地产合同仲裁案。控股股东因多重债务纠纷被执行，约1.19亿股被司法轮候冻结。本次为首轮拍卖，后续可能有更多股份被处置。"
+    },
+    {
+        id: 2, name: "利欧股份", code: "002131", market: "SZ",
+        shares: "迹象信息持有4577.92万股",
+        platform: "jd", court: "迹象信息管理人（破产强清）",
+        date: "2026-06-05", dateEnd: "2026-06-06",
+        dateDisplay: "06-05 10:00", dateEndDisplay: "06-06 10:00",
+        price: "约9216.9万元", priceNote: "约2.01元/股",
+        summary: "股东迹象信息（破产清算中）所持4577.92万股将在京东破产强清平台拍卖，占总股本0.68%。系2016年发行股份购买资产时取得。",
+        background: "利欧股份主营数字营销与水泵。迹象信息因破产清算，其管理人依法拍卖所持利欧股份股票偿债。利欧股份经营正常，本次拍卖对公司治理无实质影响，但体量较大或对二级市场形成短期抛压。"
+    },
+    {
+        id: 3, name: "群兴玩具", code: "002575", market: "SZ",
+        shares: "深圳星河持有140万股（第二次拍卖）",
+        platform: "ali", court: "江苏省苏州市中级人民法院",
+        date: "2026-06-08", dateEnd: "2026-06-09",
+        dateDisplay: "06-08 10:00", dateEndDisplay: "06-09 10:00",
+        price: "一拍价80%", priceNote: "降价二拍",
+        summary: "第一大股东深圳星河140万股进行降价第二次拍卖（一拍已流拍），另有830万股将于后续安排拍卖。",
+        background: "群兴玩具第一大股东深圳星河因债务纠纷被苏州中院强制执行。2026年4月首拍流拍，本次为降价后二拍。累计拟拍卖约970万股，占公司总股本比例较大，控制权面临不确定性。"
+    },
+    {
+        id: 4, name: "恒润股份", code: "603985", market: "SH",
+        shares: "承立新持有1693.29万股",
+        platform: "ali", court: "江阴市人民法院",
+        date: "2026-06-13", dateEnd: "2026-06-14",
+        dateDisplay: "06-13 10:00", dateEndDisplay: "次日10:00",
+        price: "前20日均价×90%", priceNote: "约按市价九折",
+        summary: "5%以上股东承立新所持1693.29万股将被拍卖（占总股本约3.84%），平台为淘宝网司法拍卖。此前1280万股已分两次成交。",
+        background: "恒润股份主营法兰、锻件，近年布局算力租赁。承立新因执行裁定被深圳中院/江阴法院联合处置。此前1014万股被王梅耳竞得、266万股被佟亮竞得，本次为其剩余持股的拍卖。"
+    },
+    {
+        id: 5, name: "万马科技", code: "300698", market: "SZ",
+        shares: "闫楠持有部分股份（质押限售）",
+        platform: "ali", court: "浙江省杭州市上城区人民法院",
+        date: "2026-06-15", dateEnd: "2026-06-16",
+        dateDisplay: "06-15 10:00", dateEndDisplay: "06-16 10:00",
+        price: "待公告", priceNote: "参考前20日均价",
+        summary: "股东闫楠所持部分质押限售股将在淘宝网司法拍卖平台拍卖。此前3月首拍流拍，92万股已于5月完成二拍成交。",
+        background: "万马科技主营通信网络设备，股东闫楠因多起债务纠纷被法院执行。2026年3月首批在京东平台流拍后转至杭州上城区法院在淘宝平台继续拍卖，闫楠持股比例因连续执行持续下降。"
+    },
+    {
+        id: 6, name: "亚士创能", code: "603378", market: "SH",
+        shares: "李金钟持有200万股",
+        platform: "ali", court: "杭州市上城区人民法院",
+        date: "2026-06-15", dateEnd: "2026-06-16",
+        dateDisplay: "06-15 10:00", dateEndDisplay: "06-16 10:00",
+        price: "约745.6万元", priceNote: "约3.73元/股",
+        summary: "控股股东一致行动人李金钟200万股无限售流通股将被拍卖。此前控股股东创能明850万股于5月23日已成交。",
+        background: "亚士创能主营建筑涂料，控股股东创能明及一致行动人因债务违约致股份连续被拍卖。控股股东持股已降至15.44%，武汉武昌区法院与杭州法院均有执行案件，控制权稳定性受关注。"
+    },
+    {
+        id: 7, name: "ST华谊", code: "300027", market: "SZ",
+        shares: "王忠军持有4000万股",
+        platform: "jd", court: "北京市朝阳区人民法院",
+        date: "2026-06-22", dateEnd: "2026-06-23",
+        dateDisplay: "06-22 10:00", dateEndDisplay: "06-23 10:00",
+        price: "待公告", priceNote: "参考前20日均价70%",
+        summary: "实控人王忠军4000万股（占总股本1.44%）将被拍卖。若成交，第一大股东持股进一步下降，控制权变动风险显著加大。",
+        background: "ST华谊连续三年扣非净利为负，2026年4月被实施其他风险警示。实控人兄弟二人资金链断裂：王忠磊180万股已在京东拍卖成交（中信系接盘），王忠军另有2800万股面临后续拍卖。"
+    },
+    {
+        id: 8, name: "广田集团", code: "002482", market: "SZ",
+        shares: "广田控股持有约1.2亿股（分批）",
+        platform: "jd", court: "辽宁省沈阳市中级人民法院",
+        date: "2026-06-22", dateEnd: "2026-06-23",
+        dateDisplay: "06-22 10:00", dateEndDisplay: "06-23 10:00",
+        price: "分批拍卖", priceNote: "单批约601万元起",
+        summary: "持股5%以上股东广田控股所持约1.2亿股将在京东司法拍卖平台分多批次拍卖。本次为第一次拍卖（含30个标的）。",
+        background: "广田集团主营建筑装饰，广田控股因债务纠纷被沈阳中院执行。总计约1.2亿股被安排拍卖，分为多个批次在京东平台进行。体量巨大，将显著影响公司股权结构和控制权格局。"
+    },
+    {
+        id: 9, name: "松井股份", code: "688157", market: "SH",
+        shares: "凌云剑持有56.86万股",
+        platform: "jd", court: "广东省深圳市中级人民法院",
+        date: "2026-06-25", dateEnd: "2026-06-26",
+        dateDisplay: "06-25 10:00", dateEndDisplay: "06-26 10:00",
+        price: "约1942.5万元", priceNote: "前20日均价×股数",
+        summary: "实控人凌云剑直接持有的56.86万股（占总股本0.36%）在京东网司法拍卖。受让方6个月内不得减持。",
+        background: "松井股份为科创板涂料企业，2026Q1由盈转亏。实控人凌云剑与星帝企业存在合同纠纷被强制执行。凌云剑仍通过其他主体间接控制公司，本次处置对控制权影响有限。"
+    },
+    {
+        id: 10, name: "迅游科技", code: "300467", market: "SZ",
+        shares: "袁旭持有830.54万股",
+        platform: "ali", court: "成都市中级人民法院",
+        date: "2026-06-29", dateEnd: "2026-06-30",
+        dateDisplay: "06-29 14:00", dateEndDisplay: "06-30 14:00",
+        price: "待公告", priceNote: "参考前20日均价",
+        summary: "持股5%以上股东（创始人）袁旭830.54万股将被拍卖，占公司总股本约4.19%。拍卖平台为阿里司法拍卖。",
+        background: "袁旭为迅游科技创始人，因借款担保纠纷被成都中院强制执行。公司主营游戏加速器业务，股价近期创8年新高。袁旭此前多次质押股份，本次系其个人债务升级所致。若成交将显著改变持股结构。"
+    },
+    {
+        id: 11, name: "*ST三房", code: "600370", market: "SH",
+        shares: "三房巷集团持有4917万股",
+        platform: "ali", court: "江阴市人民法院",
+        date: "2026-07-05", dateEnd: "2026-07-06",
+        dateDisplay: "待定（约7月初）", dateEndDisplay: "告知书后约30日",
+        price: "约4509万元", priceNote: "1.31元×70%×4917万",
+        summary: "控股股东三房巷集团4917万股将被拍卖，累计拟拍卖达3.84亿股（占总股本约9.5%）。平台为阿里司法拍卖。",
+        background: "*ST三房主营化纤及薄膜，因金融借款合同纠纷被江阴法院执行。控股股东持有约73%股份，大量被轮候冻结。公司股价持续暴跌（连续14个跌停），目前收于1.31元附近，存在面值退市风险。"
+    }
+];
+
+function getStatus(item) {
+    const today = new Date('2026-05-30');
+    const auctionDate = new Date(item.date);
+    const diff = Math.ceil((auctionDate - today) / (1000*60*60*24));
+    if (diff <= 0) return { label: '进行中', cls: 'status-live', type: 'live' };
+    if (diff <= 7) return { label: diff + '天后', cls: 'status-soon', type: 'soon' };
+    if (item.dateDisplay.includes('待定')) return { label: '待定', cls: 'status-pending', type: 'pending' };
+    return { label: diff + '天后', cls: 'status-upcoming', type: 'upcoming' };
+}
+
+function renderTable(filter) {
+    const tbody = document.getElementById('table-body');
+    tbody.innerHTML = '';
+    let count = 0, soonCount = 0, aliCount = 0, jdCount = 0;
+
+    auctionData.forEach((item) => {
+        const st = getStatus(item);
+        if (st.type === 'soon' || st.type === 'live') soonCount++;
+        if (item.platform === 'ali') aliCount++;
+        if (item.platform === 'jd') jdCount++;
+
+        if (filter === 'soon' && st.type !== 'soon' && st.type !== 'live') return;
+        if (filter === 'ali' && item.platform !== 'ali') return;
+        if (filter === 'jd' && item.platform !== 'jd') return;
+        count++;
+
+        const platformLabel = item.platform === 'ali' ? '<span class="platform-tag platform-ali">阿里拍卖</span>' : '<span class="platform-tag platform-jd">京东拍卖</span>';
+        const exchange = item.code.startsWith('6') ? 'SH' : 'SZ';
+
+        tbody.innerHTML += `
+            <tr>
+                <td style="text-align:center; color:var(--text-muted); font-size:12px;">${item.id}</td>
+                <td>
+                    <div class="stock-info">
+                        <span class="stock-name">${item.name}</span>
+                        <span class="stock-code">${item.code}.${exchange}</span>
+                        <span class="stock-shares">${item.shares}</span>
+                        ${platformLabel}
+                    </div>
+                </td>
+                <td style="font-size:12px; color:var(--text-secondary)">${item.court}</td>
+                <td class="date-cell">
+                    <div class="date-main">${item.dateDisplay}</div>
+                    <div class="date-end">至 ${item.dateEndDisplay}</div>
+                    <div style="margin-top:6px"><span class="status-badge ${st.cls}"><span class="status-dot"></span>${st.label}</span></div>
+                </td>
+                <td>
+                    <div class="price-cell">${item.price}</div>
+                    <div class="price-note">${item.priceNote}</div>
+                </td>
+                <td class="summary-cell">${item.summary}</td>
+                <td class="bg-cell">${item.background}</td>
+            </tr>
+        `;
+    });
+
+    document.getElementById('total-count').textContent = auctionData.length;
+    document.getElementById('soon-count').textContent = soonCount;
+    document.getElementById('ali-count').textContent = aliCount;
+    document.getElementById('jd-count').textContent = jdCount;
+    document.getElementById('showing-count').textContent = `显示 ${count} 条`;
+}
+
+function applyFilter(type, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderTable(type);
+}
+
+renderTable('all');
+</script>
+</body>
+</html>
