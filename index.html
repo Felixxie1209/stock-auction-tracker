@@ -219,9 +219,9 @@
     <div class="container">
         <header class="header">
             <h1>上市公司股票司法拍卖标的跟踪</h1>
-            <p class="subtitle">阿里司法拍卖平台数据，实时跟踪A股/北交所/新三板上市公司股票拍卖动态</p>
+            <p class="subtitle">阿里/京东司法拍卖平台数据，实时跟踪A股/北交所/新三板上市公司股票拍卖动态</p>
             <div class="meta-row">
-                <span>&#128197; 最近更新：<strong id="update-date">2026-05-30</strong></span>
+                <span>&#128197; 最近更新：<strong id="update-date">2026-06-09</strong></span>
                 <span>&#128260; 更新频率：每周一、周四 10:00前</span>
                 <span>&#127919; 筛选范围：尚未结拍（即将开拍 + 进行中）</span>
             </div>
@@ -230,17 +230,22 @@
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="label">跟踪标的总数</div>
-                <div class="value" id="total-count">12</div>
-                <div class="desc">阿里司法拍卖平台</div>
+                <div class="value" id="total-count">16</div>
+                <div class="desc">阿里 + 京东司法拍卖平台</div>
             </div>
             <div class="stat-card">
                 <div class="label">7日内开拍</div>
-                <div class="value warn" id="soon-count">2</div>
+                <div class="value warn" id="soon-count">5</div>
                 <div class="desc">需重点关注</div>
             </div>
             <div class="stat-card">
-                <div class="label">涉及公司数</div>
-                <div class="value" id="ali-count" style="color:#d4380d">10</div>
+                <div class="label">阿里平台标的</div>
+                <div class="value" id="ali-count" style="color:#d4380d">13</div>
+                <div class="desc">含上市公司及券商</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">京东平台标的</div>
+                <div class="value" id="jd-count" style="color:#0070c0">3</div>
                 <div class="desc">含上市公司及券商</div>
             </div>
         </div>
@@ -254,6 +259,8 @@
                 <div class="filter-group">
                     <button class="filter-btn active" onclick="applyFilter('all', this)">全部</button>
                     <button class="filter-btn" onclick="applyFilter('soon', this)">7日内</button>
+                    <button class="filter-btn" onclick="applyFilter('ali', this)">阿里</button>
+                    <button class="filter-btn" onclick="applyFilter('jd', this)">京东</button>
                 </div>
             </div>
             <div class="table-scroll">
@@ -276,32 +283,51 @@
         </div>
 
         <div class="footer-section">
+            <div class="footer-title">快速入口</div>
+            <div class="footer-desc">直达主要司法拍卖平台，获取最新标的信息</div>
+            <div class="link-grid">
+                <a class="platform-link" href="https://sf.taobao.com/item_list.htm?category=125088031&auction_source=0&st_param=1&auction_start_seg=-1" target="_blank">
+                    <div class="platform-icon icon-ali">阿里</div>
+                    <div>
+                        <div class="link-text">阿里司法拍卖 · 股权专区</div>
+                        <div class="link-desc">sf.taobao.com — 全国最大司法拍卖平台</div>
+                    </div>
+                </a>
+                <a class="platform-link" href="https://auction.jd.com/sifa.html" target="_blank">
+                    <div class="platform-icon icon-jd">京东</div>
+                    <div>
+                        <div class="link-text">京东司法拍卖 · 资产交易</div>
+                        <div class="link-desc">auction.jd.com — 京东资产交易平台</div>
+                    </div>
+                </a>
+            </div>
             <div class="disclaimer">
                 免责声明：本页面信息仅供参考，不构成投资建议。具体拍卖条件、保证金要求、竞买资格等以法院公告和平台公示为准。<br>
-                数据来源：上市公司公告、阿里司法拍卖平台（sf.taobao.com）。更新频率：每周一、周四。
+                数据来源：上市公司公告、阿里司法拍卖平台（sf.taobao.com）、京东司法拍卖平台（auction.jd.com）。更新频率：每周一、周四。<br>
+                统计时间：2026年6月9日 09:38（北京时间），标的状态以平台实时数据为准。
             </div>
         </div>
     </div>
 
 <script>
-// Data sorted by auction start date — updated 2026-05-30 (阿里平台)
+// Data sorted by auction start date — updated 2026-06-09
 const auctionData = [
     {
         id: 1, name: "思创智联", code: "300078", market: "SZ",
-        shares: "思创医惠集团持有302.89万股（2笔）",
+        shares: "思创医惠集团持有302.89万股（分2笔）",
         platform: "ali", court: "浙江省杭州市中级人民法院",
         date: "2026-06-08", dateEnd: "2026-06-09",
         dateDisplay: "06-08 10:00", dateEndDisplay: "06-09 10:00",
         price: "190.92万 + 682.63万", priceNote: "企业破产清算",
         summary: "破产管理人分2笔处置思创医惠集团持有的上市公司股票：66.2万股(起拍190.92万)和236.69万股(起拍682.63万)，均为无限售流通股。",
-        background: "思创医惠(现名思创智联)原主营智慧医疗和物联网，集团公司进入破产清算程序，其持有的上市公司股份被分拆拍卖处置。两笔标的同日开拍。",
+        background: "思创智联(原思创医惠)主营智慧医疗和物联网，集团公司进入破产清算程序，其持有的上市公司股份被分拆拍卖处置。两笔标的同日开拍。",
         auctionUrl: "https://sf-item.taobao.com/sf_item/1050032213664.htm",
         extraUrls: ["https://sf-item.taobao.com/sf_item/1049073250873.htm"]
     },
     {
         id: 2, name: "群兴玩具", code: "002575", market: "SZ",
         shares: "深圳星河持有140万股（第二次拍卖）",
-        platform: "ali", court: "深圳市龙岗区人民法院",
+        platform: "ali", court: "广东省深圳市龙岗区人民法院",
         date: "2026-06-08", dateEnd: "2026-06-09",
         dateDisplay: "06-08 10:00", dateEndDisplay: "06-09 10:00",
         price: "762.72万元", priceNote: "评估价1153.6万×70%",
@@ -312,7 +338,7 @@ const auctionData = [
     {
         id: 3, name: "国新证券", code: "非上市", market: "",
         shares: "科铭实业持有4000万股（原华融证券）",
-        platform: "ali", court: "深圳市福田区人民法院",
+        platform: "ali", court: "广东省深圳市福田区人民法院",
         date: "2026-06-11", dateEnd: "2026-06-12",
         dateDisplay: "06-11 10:00", dateEndDisplay: "06-12 10:00",
         price: "8652万元", priceNote: "评估价1.236亿×70%",
@@ -323,104 +349,148 @@ const auctionData = [
     {
         id: 4, name: "恒润股份", code: "603985", market: "SH",
         shares: "承立新持有1693.29万股（分3笔）",
-        platform: "ali", court: "江阴市人民法院",
+        platform: "ali", court: "江苏省江阴市人民法院",
         date: "2026-06-13", dateEnd: "2026-06-14",
         dateDisplay: "06-13 10:00", dateEndDisplay: "06-14 10:00",
         price: "7823万/1.14亿/1.94亿", priceNote: "3笔合计3.86亿元",
         summary: "分3笔同时拍卖：343.29万股(起拍7823万)、500万股(起拍1.1394亿)、850万股(起拍1.937亿)，均为无限售流通股，评估价70%起拍。",
-        background: "恒润股份主营法兰锻件，原控股股东承立新因金融借款合同纠纷被江阴法院强制执行。此前1280万股已分两次成交(王梅耳1014万股、佟亮266万股)，本次为剩余持股。",
+        background: "恒润股份主营法兰锻件，原控股股东承立新因金融借款合同纠纷被江阴法院强制执行。此前1280万股已分两次成交，本次为剩余持股。",
         auctionUrl: "https://sf-item.taobao.com/sf_item/1051428601811.htm",
         extraUrls: ["https://sf-item.taobao.com/sf_item/1050448090290.htm", "https://sf-item.taobao.com/sf_item/1051413249499.htm"]
     },
     {
-        id: 5, name: "*ST亚士", code: "603378", market: "SH",
-        shares: "李**持有200万股",
-        platform: "ali", court: "杭州市上城区人民法院",
+        id: 5, name: "ST百利", code: "603959", market: "SH",
+        shares: "原控股股东新海新持有2946.9万股",
+        platform: "ali", court: "上海市崇明区人民法院",
+        date: "2026-06-13", dateEnd: "2026-06-16",
+        dateDisplay: "06-13 10:00", dateEndDisplay: "06-16 10:00",
+        price: "约1.28亿元", priceNote: "占总股本6.01%",
+        summary: "拍卖原控股股东西藏新海新创业投资持有的ST百利2946.9万股无限售流通股，展示起拍价约1.28亿元，可能导致公司控制权发生变化。",
+        background: "ST百利主营工程咨询设计，原控股股东新海新因债务纠纷被强制执行。若拍卖成功，新海新持股将降至5.82%，公司控制权格局或生变。公司此前已被证监会立案。",
+        auctionUrl: "https://sf.taobao.com/item_list.htm?keyword=ST%E7%99%BE%E5%88%A9"
+    },
+    {
+        id: 6, name: "*ST亚士", code: "603378", market: "SH",
+        shares: "李金钟持有200万股",
+        platform: "ali", court: "浙江省杭州市上城区人民法院",
         date: "2026-06-15", dateEnd: "2026-06-16",
         dateDisplay: "06-15 10:00", dateEndDisplay: "06-16 10:00",
         price: "754.6万元", priceNote: "市场价1078万×70%",
-        summary: "拍卖被执行人李**持有的*ST亚士200万股无限售流通股，市场参考价1078万元，起拍价754.6万元，保证金150.92万元。",
-        background: "亚士创能(现*ST亚士)主营建筑节能材料，因经营困难被ST。此前控股股东创能明850万股于5月23日已成交。被执行人李**所持股份因个人债务被司法冻结并强制拍卖。",
+        summary: "拍卖被执行人李金钟持有的*ST亚士200万股无限售流通股，市场参考价1078万元，起拍价754.6万元，保证金150.92万元。",
+        background: "亚士创能(现*ST亚士)主营建筑节能材料，因经营困难被ST。此前控股股东创能明850万股于5月23日已成交。被执行人李金钟所持股份因个人债务被司法冻结并强制拍卖。",
         auctionUrl: "https://sf-item.taobao.com/sf_item/1051400161840.htm"
     },
     {
-        id: 6, name: "万马科技", code: "300698", market: "SZ",
-        shares: "闫*持有240万股（分4笔各60万股）",
-        platform: "ali", court: "杭州市上城区人民法院",
+        id: 7, name: "万马科技", code: "300698", market: "SZ",
+        shares: "闫楠持有240万股（分4笔各60万股）",
+        platform: "ali", court: "浙江省杭州市上城区人民法院",
         date: "2026-06-15", dateEnd: "2026-06-16",
         dateDisplay: "06-15 10:00", dateEndDisplay: "06-16 10:00",
         price: "1584.66万元/笔", priceNote: "4笔合计6338.64万元",
-        summary: "分4笔同时拍卖被执行人闫*持有的万马科技各60万股(合计240万股)，每笔起拍1584.66万元，市场价2263.8万/笔，保证金316.9万/笔。",
-        background: "万马科技主营智能配用电设备。被执行人闫*所持4笔各60万股因债务纠纷被杭州上城区法院冻结并同时挂拍。此前3月首批在京东平台流拍，92万股5月完成二拍成交。",
+        summary: "分4笔同时拍卖被执行人闫楠持有的万马科技各60万股(合计240万股)，每笔起拍1584.66万元，市场价2263.8万/笔，保证金316.9万/笔。",
+        background: "万马科技主营智能配用电设备。被执行人闫楠所持4笔各60万股因债务纠纷被杭州上城区法院冻结并同时挂拍。此前3月首批在京东平台流拍，92万股5月完成二拍成交。",
         auctionUrl: "https://sf-item.taobao.com/sf_item/1051428441674.htm",
         extraUrls: ["https://sf-item.taobao.com/sf_item/1050463102804.htm", "https://sf-item.taobao.com/sf_item/1051428717015.htm", "https://sf-item.taobao.com/sf_item/1050447886534.htm"]
     },
     {
-        id: 7, name: "古鳌科技", code: "300551", market: "SZ",
-        shares: "陈崇军持有260万股（第一大股东）",
+        id: 8, name: "深华发A", code: "000020", market: "SZ",
+        shares: "武汉中恒集团持有318.99万股（分5笔，二拍）",
+        platform: "jd", court: "广东省深圳市中级人民法院",
+        date: "2026-06-17", dateEnd: "2026-06-18",
+        dateDisplay: "06-17 10:00", dateEndDisplay: "06-18 10:00",
+        price: "待公告", priceNote: "一拍于5月28-29日流拍",
+        summary: "控股股东武汉中恒集团318.99万股将被第二次司法拍卖，分5笔（4次各64万股、1次62.99万股），一拍已于京东平台流拍。",
+        background: "深华发A主营精密注塑件及显示器。控股股东武汉中恒集团因与万科合同纠纷被深圳中院强制执行。一拍流拍后启动二拍程序，公司称已达成债务冲抵共识并申诉异议。",
+        auctionUrl: "https://auction.jd.com/sifa.html"
+    },
+    {
+        id: 9, name: "古鳌科技", code: "300551", market: "SZ",
+        shares: "陈崇军持有260万股（5%以上股东）",
         platform: "ali", court: "湖南省长沙市望城区人民法院",
         date: "2026-06-20", dateEnd: "2026-06-21",
         dateDisplay: "06-20 10:00", dateEndDisplay: "06-21 10:00",
         price: "待公告", priceNote: "参考前20日均价",
-        summary: "第一大股东陈崇军260万股（占总股本0.71%）将在淘宝网司法拍卖平台拍卖。5%以上股东持股被强制执行。",
-        background: "古鳌科技主营智能现金处理设备（点钞机、清分机等）。第一大股东陈崇军因个人债务纠纷被长沙望城区法院强制执行，此前已有240万股被公告拍卖。若全部成交，控制权格局生变。",
-        auctionUrl: "https://sf.taobao.com/item_list.htm?keyword=古鳌科技"
+        summary: "5%以上股东陈崇军260万股（占总股本0.76%）将在淘宝网司法拍卖平台拍卖。此前实控人已被判刑，持股持续被处置。",
+        background: "古鳌科技主营智能现金处理设备。第一大股东陈崇军因个人债务纠纷及操纵证券市场罪被判刑，其持股被长沙望城区法院持续强制执行。若全部成交，控制权格局生变。",
+        auctionUrl: "https://sf.taobao.com/item_list.htm?keyword=%E5%8F%A4%E9%B3%8C%E7%A7%91%E6%8A%80"
     },
     {
-        id: 8, name: "劲嘉股份", code: "002191", market: "SZ",
+        id: 10, name: "劲嘉股份", code: "002191", market: "SZ",
         shares: "劲嘉创投持有3500万股（控股股东）",
         platform: "ali", court: "广东省深圳市中级人民法院",
         date: "2026-06-23", dateEnd: "2026-06-24",
         dateDisplay: "06-23 10:00", dateEndDisplay: "06-24 10:00",
         price: "待公告", priceNote: "参考前20日均价",
         summary: "控股股东劲嘉创投3500万股（占总股本2.41%）将被司法拍卖。若成交，控股股东持股比例将由22.37%降至19.96%。",
-        background: "劲嘉股份主营烟标印刷及包装，控股股东劲嘉创投因债务纠纷被深圳中院执行。此前已有部分股份被拍卖成交（2026年4-5月），本次为新一轮拍卖。控股股东持股比例持续稀释。",
-        auctionUrl: "https://sf.taobao.com/item_list.htm?keyword=劲嘉股份"
+        background: "劲嘉股份主营烟标印刷及包装，控股股东劲嘉创投因借款合同纠纷被深圳中院执行。此前已有4100万股被拍卖成交（2026年1-5月），本次为新一轮拍卖，控股股东持股持续稀释。",
+        auctionUrl: "https://sf.taobao.com/item_list.htm?keyword=%E5%8A%B2%E5%98%89%E8%82%A1%E4%BB%BD"
     },
     {
-        id: 9, name: "迅游科技", code: "300467", market: "SZ",
-        shares: "袁旭持有830.54万股（创始人）",
+        id: 11, name: "松井股份", code: "688157", market: "SH",
+        shares: "凌云剑持有56.87万股（实际控制人）",
+        platform: "jd", court: "广东省深圳市中级人民法院",
+        date: "2026-06-25", dateEnd: "2026-06-26",
+        dateDisplay: "06-25 10:00", dateEndDisplay: "06-26 10:00",
+        price: "1943万元", priceNote: "占总股本0.36%",
+        summary: "实际控制人凌云剑直接持有的56.87万股将被司法拍卖，起拍价1943万元。拍卖在京东网司法拍卖平台进行。",
+        background: "松井股份主营高端消费电子涂料及汽车涂料。实控人凌云剑因与星帝企业有限公司合同纠纷被深圳中院强制执行。其直接及间接合计持有公司约7600万股，本次拍卖占其直接持股的一部分。",
+        auctionUrl: "https://auction.jd.com/sifa.html"
+    },
+    {
+        id: 12, name: "惠同股份", code: "834189", market: "新三板",
+        shares: "朱春树持有500万股",
+        platform: "ali", court: "浙江省丽水市遂昌县人民法院",
+        date: "2026-06-27", dateEnd: "2026-06-28",
+        dateDisplay: "06-27 10:00", dateEndDisplay: "06-28 10:00",
+        price: "393.16万元", priceNote: "新三板挂牌公司",
+        summary: "拍卖股东朱春树持有的惠同股份500万股，起拍价393.162万元。惠同股份为新三板挂牌公司，主营金属纤维及制品。",
+        background: "惠同股份(834189)为新三板创新层企业，主营金属纤维及制品，应用于军工、化工等领域。股东朱春树因个人法律纠纷被遂昌县法院强制执行，其持股被裁定拍卖。",
+        auctionUrl: "https://sf.taobao.com/item_list.htm?keyword=%E6%83%A0%E5%90%8C%E8%82%A1%E4%BB%BD"
+    },
+    {
+        id: 13, name: "迅游科技", code: "300467", market: "SZ",
+        shares: "袁旭持有830.54万股（创始人/第一大股东）",
         platform: "ali", court: "四川省成都市中级人民法院",
         date: "2026-06-29", dateEnd: "2026-06-30",
         dateDisplay: "06-29 14:00", dateEndDisplay: "06-30 14:00",
         price: "2.7亿元", priceNote: "市场价3.22亿×84%",
-        summary: "拍卖迅游科技创始人袁旭持有的830.54万股(占总股本约4.19%)，市场价3.2234亿元，起拍价2.7亿元，保证金1611.75万元。",
-        background: "袁旭为迅游科技创始人，因借款担保纠纷被成都中院强制执行。公司主营游戏加速器业务，股价近期创8年新高。袁旭此前多次质押股份，本次系其个人债务升级所致。若成交将显著改变持股结构。",
+        summary: "拍卖迅游科技创始人袁旭持有的830.54万股(占总股本约4.09%)，市场价约3.22亿元，起拍价2.7亿元，保证金1611.75万元。",
+        background: "袁旭为迅游科技创始人、第一大股东，因借款担保纠纷被成都中院强制执行。公司主营游戏加速器业务。袁旭此前多次质押股份，本次系其个人债务升级所致，若成交将显著改变持股结构。",
         auctionUrl: "https://sf-item.taobao.com/sf_item/1054162118627.htm"
     },
     {
-        id: 10, name: "申港证券", code: "非上市", market: "",
-        shares: "被执行人持有合计9846.16万股（3笔）",
-        platform: "ali", court: "许昌市魏都区人民法院",
+        id: 14, name: "*ST三房", code: "600370", market: "SH",
+        shares: "三房巷集团持有4917万股（控股股东）",
+        platform: "jd", court: "江苏省江阴市人民法院",
+        date: "2026-06-30", dateEnd: "2026-07-01",
+        dateDisplay: "约6月底-7月初", dateEndDisplay: "告知书后约30日",
+        price: "约4509万元", priceNote: "按1.31元×70%估算",
+        summary: "控股股东三房巷集团4917万股将被拍卖，累计拟拍卖达3.84亿股。拍卖平台为京东网司法拍卖平台，具体时间以法院公告为准。",
+        background: "*ST三房主营化纤及薄膜，因金融借款合同纠纷被江阴法院执行。控股股东持有约73%股份，大量被轮候冻结。公司股价持续暴跌，目前收于1.31元附近，存在面值退市风险。",
+        auctionUrl: "https://auction.jd.com/sifa.html"
+    },
+    {
+        id: 15, name: "申港证券", code: "非上市", market: "",
+        shares: "上海煌富贸易持有合计9846.16万股（3笔）",
+        platform: "ali", court: "河南省许昌市魏都区人民法院",
         date: "2026-07-01", dateEnd: "2026-07-02",
         dateDisplay: "07-01 10:00", dateEndDisplay: "07-02 10:00",
         price: "1646万/5030万/5030万", priceNote: "3笔合计1.17亿元",
         summary: "分3笔拍卖申港证券股权：1384.62万股(起拍1646.06万)、4230.77万股×2笔(各起拍5029.63万)，评估价即起拍价，保证金20%。",
-        background: "申港证券为非上市券商(总部上海)，被执行人所持股权因债务纠纷被许昌魏都区法院强制执行拍卖，3笔标的同日开拍。",
+        background: "申港证券为非上市券商(总部上海)，被执行人上海煌富贸易所持股权因债务纠纷被许昌魏都区法院强制执行拍卖，3笔标的同日开拍。",
         auctionUrl: "https://sf-item.taobao.com/sf_item/1055377125993.htm",
         extraUrls: ["https://sf-item.taobao.com/sf_item/1056310428350.htm", "https://sf-item.taobao.com/sf_item/1053633603444.htm"]
     },
     {
-        id: 11, name: "*ST三房", code: "600370", market: "SH",
-        shares: "三房巷集团持有4917万股",
-        platform: "ali", court: "江阴市人民法院",
-        date: "2026-07-05", dateEnd: "2026-07-06",
-        dateDisplay: "待定（约7月初）", dateEndDisplay: "告知书后约30日",
-        price: "约4509万元", priceNote: "1.31元×70%×4917万",
-        summary: "控股股东三房巷集团4917万股将被拍卖，累计拟拍卖达3.84亿股（占总股本约9.5%）。平台为阿里司法拍卖。",
-        background: "*ST三房主营化纤及薄膜，因金融借款合同纠纷被江阴法院执行。控股股东持有约73%股份，大量被轮候冻结。公司股价持续暴跌，目前收于1.31元附近，存在面值退市风险。",
-        auctionUrl: "https://sf.taobao.com/item_list.htm?keyword=三房巷"
-    },
-    {
-        id: 12, name: "荣盛发展", code: "002146", market: "SZ",
-        shares: "荣盛控股持有1.32亿股",
-        platform: "ali", court: "天津市高级人民法院",
-        date: "2026-07-10", dateEnd: "2026-07-11",
-        dateDisplay: "待定（二拍待公告）", dateEndDisplay: "一拍流拍后60日内",
-        price: "一拍价80%（预估）", priceNote: "一拍起拍价约1.82亿元",
-        summary: "控股股东荣盛控股1.32亿股（占总股本3.05%）一拍已于4月27-28日流拍（无人报名）。预计6-7月安排二拍，起拍价将在一拍基础上降价20%。",
-        background: "荣盛发展为河北地产龙头，近年受行业下行影响经营承压，2026Q1亏损6.58亿元。控股股东荣盛控股因债务纠纷被天津高院执行，持有公司7.52亿股（占17.29%），大量被冻结。一拍流拍反映市场对地产股接盘意愿极低。",
-        auctionUrl: "https://sf.taobao.com/item_list.htm?keyword=荣盛发展"
+        id: 16, name: "古鳌科技", code: "300551", market: "SZ",
+        shares: "陈崇军持有255万股（第一大股东）",
+        platform: "ali", court: "湖南省长沙市望城区人民法院",
+        date: "2026-07-04", dateEnd: "2026-07-05",
+        dateDisplay: "07-04 10:00", dateEndDisplay: "07-05 10:00",
+        price: "待公告", priceNote: "参考前20日均价",
+        summary: "第一大股东陈崇军255万股（占总股本0.75%）将被司法拍卖。若成交，陈崇军持股将降至16.60%，实控人表决权降至21.10%。",
+        background: "古鳌科技第一大股东陈崇军因操纵证券市场罪被判刑，个人债务纠纷持续发酵。长沙望城区法院分批处置其持股，此前240万股已公告拍卖，本次为新增255万股。",
+        auctionUrl: "https://sf.taobao.com/item_list.htm?keyword=%E5%8F%A4%E9%B3%8C%E7%A7%91%E6%8A%80"
     }
 ];
 
@@ -431,24 +501,30 @@ function getStatus(item) {
     const diff = Math.ceil((auctionDate - today) / (1000*60*60*24));
     if (diff <= 0) return { label: '进行中', cls: 'status-live', type: 'live' };
     if (diff <= 7) return { label: diff + '天后', cls: 'status-soon', type: 'soon' };
-    if (item.dateDisplay.includes('待定')) return { label: '待定', cls: 'status-pending', type: 'pending' };
+    if (item.dateDisplay.includes('待定') || item.dateDisplay.includes('约')) return { label: '待定', cls: 'status-pending', type: 'pending' };
     return { label: diff + '天后', cls: 'status-upcoming', type: 'upcoming' };
 }
 
 function renderTable(filter) {
     const tbody = document.getElementById('table-body');
     tbody.innerHTML = '';
-    let count = 0, soonCount = 0;
+    let count = 0, soonCount = 0, aliCount = 0, jdCount = 0;
 
     auctionData.forEach((item) => {
         const st = getStatus(item);
         if (st.type === 'soon' || st.type === 'live') soonCount++;
+        if (item.platform === 'ali') aliCount++;
+        if (item.platform === 'jd') jdCount++;
 
         if (filter === 'soon' && st.type !== 'soon' && st.type !== 'live') return;
+        if (filter === 'ali' && item.platform !== 'ali') return;
+        if (filter === 'jd' && item.platform !== 'jd') return;
         count++;
 
         const exchange = item.market || (item.code.startsWith('6') ? 'SH' : 'SZ');
-        const codeDisplay = item.code === '非上市' ? '非上市' : `${item.code}.${exchange}`;
+        const codeDisplay = item.code === '非上市' ? '非上市' : (item.market === '新三板' ? '834189.OC' : `${item.code}.${exchange}`);
+        const platformClass = item.platform === 'ali' ? 'platform-ali' : 'platform-jd';
+        const platformLabel = item.platform === 'ali' ? '阿里拍卖' : '京东拍卖';
 
         tbody.innerHTML += `
             <tr>
@@ -458,6 +534,7 @@ function renderTable(filter) {
                         <span class="stock-name">${item.name}</span>
                         <span class="stock-code">${codeDisplay}</span>
                         <span class="stock-shares">${item.shares}</span>
+                        <span class="platform-tag ${platformClass}">${platformLabel}</span>
                     </div>
                 </td>
                 <td style="font-size:12px; color:var(--text-secondary)">${item.court}</td>
@@ -482,7 +559,8 @@ function renderTable(filter) {
 
     document.getElementById('total-count').textContent = auctionData.length;
     document.getElementById('soon-count').textContent = soonCount;
-    document.getElementById('ali-count').textContent = auctionData.length;
+    document.getElementById('ali-count').textContent = aliCount;
+    document.getElementById('jd-count').textContent = jdCount;
     document.getElementById('showing-count').textContent = `显示 ${count} 条`;
 }
 
