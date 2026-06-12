@@ -221,7 +221,7 @@
             <h1>上市公司股票司法拍卖标的跟踪</h1>
             <p class="subtitle">阿里/京东司法拍卖平台数据，实时跟踪A股/北交所/新三板上市公司股票拍卖动态</p>
             <div class="meta-row">
-                <span>&#128197; 最近更新：<strong id="update-date">2026-06-11</strong></span>
+                <span>&#128197; 最近更新：<strong id="update-date">2026-06-12</strong></span>
                 <span>&#128260; 更新频率：每周一、周四 10:00前</span>
                 <span>&#127919; 筛选范围：尚未结拍（即将开拍 + 进行中）</span>
             </div>
@@ -310,7 +310,7 @@
     </div>
 
 <script>
-// Data sorted by auction start date — updated 2026-06-11
+// Data sorted by auction start date — updated 2026-06-12
 const auctionData = [
     {
         id: 1, name: "思创智联", code: "300078", market: "SZ",
@@ -601,6 +601,39 @@ const auctionData = [
         summary: "控股股东蓝润发展控股集团2677.7万股将被司法拍卖，可能导致公司控制权发生变化。",
         background: "ST龙大(龙大美食)主营生猪屠宰及肉制品加工，控股股东蓝润发展因债务问题被法院强制执行。若本次拍卖成交，公司实控人可能发生变更。",
         auctionUrl: "https://sf.taobao.com/item_list.htm?keyword=ST%E9%BE%99%E5%A4%A7"
+    },
+    {
+        id: 27, name: "顺钠股份", code: "000533", market: "SZ",
+        shares: "蕙富博衍持有1.2亿股（控股股东，占总股本17.37%）",
+        platform: "ali", court: "浙江省杭州市余杭区人民法院",
+        date: "2026-06-16", dateEnd: "2026-06-17",
+        dateDisplay: "06-16 10:00", dateEndDisplay: "06-17 10:00",
+        price: "待公告", priceNote: "参考市价约5-6亿元",
+        summary: "控股股东蕙富博衍所持全部1.2亿股无限售流通股将被司法拍卖，占其所持股份100%，可能导致公司控制权发生变更。",
+        background: "顺钠股份主营输配电设备，控股股东蕙富博衍因债务纠纷被强制执行。公司目前无实际控制人，若拍卖完成过户，控制权格局将发生重大变化。蕙富博衍已提出执行异议。",
+        auctionUrl: "https://sf.taobao.com/item_list.htm?keyword=%E9%A1%BA%E9%92%A0%E8%82%A1%E4%BB%BD"
+    },
+    {
+        id: 28, name: "ST节能", code: "000820", market: "SZ",
+        shares: "神雾科技集团持有3300万股（5%以上股东，占总股本5.10%）",
+        platform: "ali", court: "北京市第一中级人民法院",
+        date: "2026-07-05", dateEnd: "2026-07-06",
+        dateDisplay: "07-05 10:00", dateEndDisplay: "07-06 10:00",
+        price: "1.2441亿元", priceNote: "评估价3.77元/股，保证金2488.2万",
+        summary: "5%以上股东神雾科技集团所持3300万股将被司法拍卖，起拍价1.2441亿元，保证金2488.2万元，增价幅度62.205万元。",
+        background: "ST节能(神雾节能)主营节能环保工程，5%以上股东神雾科技集团因债务违约被北京一中院强制执行。此前控股股东部分股份已多次被拍卖过户。",
+        auctionUrl: "https://sf.taobao.com/item_list.htm?keyword=ST%E8%8A%82%E8%83%BD"
+    },
+    {
+        id: 29, name: "湖北美尔雅", code: "600107", market: "SH",
+        shares: "控股股东持有205万股（占总股本比例较小）",
+        platform: "ali", court: "贵州省黔西市人民法院",
+        date: "2026-07-06", dateEnd: "2026-07-07",
+        dateDisplay: "07-06 10:00", dateEndDisplay: "07-07 10:00",
+        price: "1091万元", priceNote: "起拍价待公告确认",
+        summary: "控股股东所持205万股将被司法拍卖，起拍价1091万元。本次拍卖可能导致控股股东持股比例发生变化。",
+        background: "湖北美尔雅主营服装纺织，控股股东因债务纠纷被黔西市法院强制执行。公司已被ST，本次拍卖对公司控制权影响有限。",
+        auctionUrl: "https://sf.taobao.com/item_list.htm?keyword=%E7%BE%8E%E5%B0%94%E9%9B%85"
     }
 ];
 
