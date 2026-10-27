@@ -221,7 +221,7 @@
             <h1>上市公司股票司法拍卖标的跟踪</h1>
             <p class="subtitle">阿里/京东司法拍卖平台数据，实时跟踪A股/北交所/新三板上市公司股票拍卖动态</p>
             <div class="meta-row">
-                <span>&#128197; 最近更新：<strong id="update-date">2026-06-12</strong></span>
+                <span>&#128197; 最近更新：<strong id="update-date">2026-10-27</strong></span>
                 <span>&#128260; 更新频率：每周一、周四 10:00前</span>
                 <span>&#127919; 筛选范围：尚未结拍（即将开拍 + 进行中）</span>
             </div>
@@ -230,7 +230,7 @@
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="label">跟踪标的总数</div>
-                <div class="value" id="total-count">26</div>
+                <div class="value" id="total-count">37</div>
                 <div class="desc">阿里 + 京东司法拍卖平台</div>
             </div>
             <div class="stat-card">
@@ -254,7 +254,7 @@
             <div class="table-toolbar">
                 <div class="toolbar-left">
                     <span class="toolbar-title">拍卖标的明细</span>
-                    <span class="toolbar-count" id="showing-count">显示 26 条</span>
+                    <span class="toolbar-count" id="showing-count">显示 37 条</span>
                 </div>
                 <div class="filter-group">
                     <button class="filter-btn active" onclick="applyFilter('all', this)">全部</button>
@@ -304,13 +304,13 @@
             <div class="disclaimer">
                 免责声明：本页面信息仅供参考，不构成投资建议。具体拍卖条件、保证金要求、竞买资格等以法院公告和平台公示为准。<br>
                 数据来源：上市公司公告、阿里司法拍卖平台（sf.taobao.com）、京东司法拍卖平台（auction.jd.com）。更新频率：每周一、周四。<br>
-                统计时间：2026年6月9日 09:38（北京时间），标的状态以平台实时数据为准。
+                统计时间：2026年10月27日 10:00（北京时间），标的状态以平台实时数据为准。
             </div>
         </div>
     </div>
 
 <script>
-// Data sorted by auction start date — updated 2026-06-12
+// Data sorted by auction start date — updated 2026-10-27
 const auctionData = [
     {
         id: 1, name: "思创智联", code: "300078", market: "SZ",
@@ -634,6 +634,94 @@ const auctionData = [
         summary: "控股股东所持205万股将被司法拍卖，起拍价1091万元。本次拍卖可能导致控股股东持股比例发生变化。",
         background: "湖北美尔雅主营服装纺织，控股股东因债务纠纷被黔西市法院强制执行。公司已被ST，本次拍卖对公司控制权影响有限。",
         auctionUrl: "https://sf.taobao.com/item_list.htm?keyword=%E7%BE%8E%E5%B0%94%E9%9B%85"
+    },
+    {
+        id: 30, name: "*ST益通", code: "300430", market: "SZ",
+        shares: "童建明、童建芳持有823万股（控股股东/实际控制人，第二次拍卖）",
+        platform: "ali", court: "相关中级人民法院",
+        date: "2026-10-14", dateEnd: "2026-10-15",
+        dateDisplay: "10-14 10:00", dateEndDisplay: "10-15 10:00",
+        price: "待公告", priceNote: "一拍流拍后降价二拍",
+        summary: "控股股东、实际控制人童建明、童建芳所持823万股进行第二次司法拍卖，第一次拍卖已流拍。累计涉及6180.24万股，存在改变公司控制权的风险。",
+        background: "*ST益通主营节能环保工程，控股股东及实际控制人童建明、童建芳因债务纠纷被法院强制执行。一拍流拍后降价进入二拍程序，累计涉及股份数量较大，若全部成交将导致控制权变更。",
+        auctionUrl: "https://sf.taobao.com/item_list.htm?keyword=*ST%E7%9B%8A%E9%80%9A"
+    },
+    {
+        id: 31, name: "*ST发展", code: "000838", market: "SZ",
+        shares: "重庆财信房地产持有3130万股（控股股东，第二轮拍卖）",
+        platform: "ali", court: "成都相关法院",
+        date: "2026-10-20", dateEnd: "2026-10-21",
+        dateDisplay: "10-20 10:00", dateEndDisplay: "10-21 10:00",
+        price: "约22.1万元", priceNote: "首轮流拍后启动第二轮",
+        summary: "控股股东重庆财信房地产3130万股进行第二轮司法拍卖，首轮部分标的流拍后重新启动。现阶段不导致实控人变更，但后续持续处置或波及控制权。",
+        background: "*ST发展主营房地产开发，控股股东重庆财信房地产因债务纠纷被成都相关法院强制执行。首轮首席轮拍卖部分流拍后启动第二轮，拍卖价格极低（约22.1万元），反映标的存在较大瑕疵或市场认可度低。",
+        auctionUrl: "https://sf.taobao.com/item_list.htm?keyword=*ST%E5%8F%91%E5%B1%95"
+    },
+    {
+        id: 32, name: "ST天喻", code: "300205", market: "SZ",
+        shares: "武汉同鑫投资持有5355.45万股（控股股东，占总股本12.45%，分三笔）",
+        platform: "ali", court: "深圳市中级人民法院",
+        date: "2026-09-29", dateEnd: "2026-09-30",
+        dateDisplay: "09-29 10:00（因系统故障顺延至19:00）", dateEndDisplay: "09-30 10:00",
+        price: "待公告", priceNote: "一拍流拍，待二拍",
+        summary: "控股股东武汉同鑫投资所持全部5355.45万股分三笔（各约1785万股）进行司法拍卖，第一次拍卖已全部流拍。存在引发实控人变动的风险，后续可能进入第二次拍卖。",
+        background: "ST天喻(天喻信息)主营智能卡及数据安全，控股股东武汉同鑫投资因债务纠纷被深圳中院强制执行。一拍3554.45万股(占总股本12.45%)全部流拍，后续将进入二拍程序。若二拍成交，公司控制权将发生变更。",
+        auctionUrl: "https://sf.taobao.com/item_list.htm?keyword=ST%E5%A4%A9%E5%96%BB"
+    },
+    {
+        id: 33, name: "恒申新材", code: "000782", market: "SZ",
+        shares: "青岛昌盛日电新能源持有1584万股（5%以上股东）",
+        platform: "ali", court: "山东省青岛市市南区人民法院",
+        date: "2026-10-13", dateEnd: "2026-10-14",
+        dateDisplay: "10-13 10:00", dateEndDisplay: "10-14 10:00",
+        price: "待公告", priceNote: "部分成交、部分流拍",
+        summary: "5%以上股东青岛昌盛日电新能源所持1584万股分两笔拍卖：800万股已成交，784万股流拍。竞得者受让后6个月内不得减持。",
+        background: "恒申新材主营化纤新材料，5%以上股东青岛昌盛日电新能源因债务纠纷被青岛市南区法院强制执行。分两笔拍卖中，800万股成功拍出，784万股因无人出价流拍，后续可能对剩余股份继续处置。",
+        auctionUrl: "https://sf.taobao.com/item_list.htm?keyword=%E6%81%92%E7%94%B3%E6%96%B0%E6%9D%90"
+    },
+    {
+        id: 34, name: "凯瑞德", code: "002072", market: "SZ",
+        shares: "控股股东持有3545.46万股（分多批次）",
+        platform: "jd", court: "相关法院",
+        date: "2026-05-06", dateEnd: "2026-07-13",
+        dateDisplay: "分批次进行", dateEndDisplay: "最新进展7月13日公告",
+        price: "约7.88元/股（成交价）", priceNote: "部分成交、部分流拍",
+        summary: "控股股东所持3545.46万股分多个批次进行司法拍卖，其中2145.46万股、1000万股、100万股等批次部分成交（约7.88元/股），部分流拍。成交总金额约2.55亿元。",
+        background: "凯瑞德主营纺织及贸易，控股股东因债务纠纷被多地法院强制执行，所持股份分多批次在司法拍卖平台处置。部分批次成功成交，部分因无人出价流拍，后续批次仍在推进中。",
+        auctionUrl: "https://auction.jd.com/sifa.html"
+    },
+    {
+        id: 35, name: "ST金顶", code: "600678", market: "SH",
+        shares: "深圳朴素至纯投资企业持有3577.67万股（占总股本10.25%）",
+        platform: "ali", court: "广东省深圳市中级人民法院",
+        date: "2026-11-24", dateEnd: "2026-11-25",
+        dateDisplay: "11-24 10:00", dateEndDisplay: "11-25 10:00",
+        price: "约2.03亿元", priceNote: "起拍价203,211,894.56元",
+        summary: "深圳朴素至纯投资企业(有限合伙)所持3577.67万股无限售流通股将被司法拍卖，起拍价约2.03亿元。若拍卖成功，该股东持股将降至10.25%，不会导致控制权变更。",
+        background: "ST金顶主营黄金珠宝及矿业，股东深圳朴素至纯投资企业因债务纠纷被深圳中院强制执行。本次处置3577.67万股，占总股本10.25%，为无限售流通股。拍卖在阿里司法拍卖平台进行。",
+        auctionUrl: "https://sf.taobao.com/item_list.htm?keyword=ST%E9%87%91%E9%A1%B6"
+    },
+    {
+        id: 36, name: "天音控股", code: "000829", market: "SZ",
+        shares: "深圳天富锦创业投资持有9867.38万股（控股股东一致行动人，占总股本9.63%）",
+        platform: "jd", court: "广东省深圳市中级人民法院",
+        date: "2026-11-02", dateEnd: "2026-11-03",
+        dateDisplay: "11-02 10:00", dateEndDisplay: "11-03 10:00",
+        price: "待公告", priceNote: "第二次拍卖，第一次已中止",
+        summary: "控股股东一致行动人深圳天富锦创业投资所持9867.38万股进行第二次司法拍卖。第一次拍卖（约1亿股）此前因质权人提出暂缓要求已被中止/撤回。公司表示不会导致控制权变更。",
+        background: "天音控股主营移动通信分销，控股股东一致行动人深圳天富锦创业投资因债务纠纷被深圳中院强制执行。第一次拍卖被中止后，第二次拍卖定于11月2日启动。此前质权人对拍卖标的提出暂缓要求，后续是否再有司法程序仍具不确定性。",
+        auctionUrl: "https://auction.jd.com/sifa.html"
+    },
+    {
+        id: 37, name: "供销大集", code: "000564", market: "SZ",
+        shares: "海南航空国际贸易等持有3.7047亿股（控股股东一致行动人，分两笔）",
+        platform: "jd", court: "海南省第一中级人民法院",
+        date: "2026-09-07", dateEnd: "2026-09-08",
+        dateDisplay: "09-07 10:00", dateEndDisplay: "09-08 10:00",
+        price: "待公告", priceNote: "因质押合同纠纷被拍卖",
+        summary: "控股股东一致行动人海南航空国际贸易等所持合计3.7047亿股分两笔进行司法拍卖，因质押合同纠纷被海南省第一中级人民法院强制执行。不会导致控制权变更。",
+        background: "供销大集主营百货零售及供应链服务，此前经历破产重整。控股股东一致行动人海南航空国际贸易等因质押合同纠纷被被海南省第一中级人民法院强制执行。本次拍卖不会导致控制权变更。",
+        auctionUrl: "https://auction.jd.com/sifa.html"
     }
 ];
 
